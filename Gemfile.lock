@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    arq (0.1.0)
+    graphy (0.1.0)
       ruby-graphviz (~> 1.2.0)
 
 GEM
@@ -17,7 +17,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  arq!
+  graphy!
   minitest (~> 5.0)
   rake (~> 12.0)
 
