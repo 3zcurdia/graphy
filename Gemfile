@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in arq.gemspec
+# Specify your gem's dependencies in Graphy.gemspec
 gemspec
 
 gem 'minitest', '~> 5.0'

@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class ArqTest < Minitest::Test
+class GraphyTest < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::Arq::VERSION
+    refute_nil ::Graphy::VERSION
   end
 
   def test_it_does_something_useful

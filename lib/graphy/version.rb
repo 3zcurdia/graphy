@@ -1,3 +1,3 @@
-module Arq
+module Graphy
   VERSION = '0.1.0'.freeze
 end

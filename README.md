@@ -1,15 +1,13 @@
-# Arq
+# Graphy
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/arq`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Create any diagram as code
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'arq'
+gem 'graphy'
 ```
 
 And then execute:
@@ -18,11 +16,52 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install arq
+    $ gem install graphy
 
 ## Usage
 
-TODO: Write usage instructions here
+### Module
+
+```ruby
+Graphy.define 'UML View' do
+  entity 'Friendly'
+  namespace "Animal Kingdom" do
+    entity 'Animal' do
+      attributes :name
+    end
+
+    entity 'Dog', 'Animal' do
+      attributes :color
+      uses 'Friendly'
+    end
+
+    entity 'Cat', 'Animal' do
+      attributes :scratch
+    end
+  end
+
+  write(png: 'hello.png')
+end
+```
+
+### State machine
+
+```ruby
+Graphy.define 'State machine' do
+  node 'A'
+  node 'B', shape: 'diamond'
+  node 'C'
+  node 'D', shape: 'egg'
+
+  step 'A', to: 'B'
+  step 'B', to: 'C'
+  step 'C', to: 'A'
+  step 'C', to: 'D'
+  step 'D', to: 'C'
+
+  write(png: 'steps.png')
+end
+```
 
 ## Development
 
@@ -32,7 +71,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/arq. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/arq/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/3zcurdia/graphy. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/3zcurdia/graphy/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## License
@@ -41,4 +80,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Arq project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/arq/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Arq project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/3zcurdia/graphy/blob/master/CODE_OF_CONDUCT.md).
