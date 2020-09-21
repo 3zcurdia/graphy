@@ -23,7 +23,7 @@ Or install it yourself as:
 ### Module
 
 ```ruby
-Graphy.define 'UML View' do
+Graphy.define 'Life View' do
   entity 'Friendly'
   namespace "Animal Kingdom" do
     entity 'Animal' do
@@ -44,6 +44,9 @@ Graphy.define 'UML View' do
 end
 ```
 
+![example02.png](https://github.com/3zcurdia/graphy/blob/master/examples/example02.rb.png)
+
+
 ### State machine
 
 ```ruby
@@ -62,6 +65,7 @@ Graphy.define 'State machine' do
   write(png: 'steps.png')
 end
 ```
+![example01.png](https://github.com/3zcurdia/graphy/blob/master/examples/example01.rb.png)
 
 ## Development
 
