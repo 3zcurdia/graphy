@@ -50,7 +50,7 @@ end
 ### State machine
 
 ```ruby
-Graphy.define 'State machine' do
+Graphy.define 'State machine', align: :horizontal  do
   node 'A'
   node 'B', shape: 'diamond'
   node 'C'
