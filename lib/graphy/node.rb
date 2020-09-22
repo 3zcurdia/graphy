@@ -20,7 +20,7 @@ module Graphy
     end
 
     def add_dependency(node, **options)
-      node = self.class.find_or_create(node) unless node.is_a?(Node)
+      node = self.class.find_or_create(node, options: {graph: graph}) unless node.is_a?(Node)
       return if Registry.instance.edge?(name, node.name)
 
       Registry.instance.edges << [name, node.name]
