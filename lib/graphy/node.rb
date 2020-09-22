@@ -4,7 +4,7 @@ module Graphy
 
     def self.find_or_create(name, options: {}, &block)
       return Registry.instance.nodes[name] if Registry.instance.node?(name)
-      node = self.new(options.merge(name: name))
+      node = self.new(**options.merge(name: name))
       node.build(&block)
       Registry.instance.nodes[name] = node
     end
