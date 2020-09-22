@@ -1,7 +1,7 @@
 module Graphy
   class Entity < Node
     def initialize(**params)
-      super(params.merge(shape: 'record'))
+      super(**params.merge(shape: 'record'))
       @attributes = []
     end
 

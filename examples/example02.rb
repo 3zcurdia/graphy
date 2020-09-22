@@ -2,7 +2,6 @@ require 'bundler/setup'
 require 'graphy'
 
 Graphy.define 'Life View' do
-  entity 'Friendly'
   entity 'Animal' do
     attributes :name, :other
   end
