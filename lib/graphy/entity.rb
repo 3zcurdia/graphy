@@ -1,7 +1,7 @@
 module Graphy
   class Entity < Node
-    def initialize(name, graph:)
-      super(name, graph: graph, shape: 'record')
+    def initialize(**params)
+      super(params.merge(shape: 'record'))
       @attributes = []
     end
 
@@ -19,7 +19,7 @@ module Graphy
 
     def attributes_label
       return if @attributes.empty?
-      "| #{@attributes.join("\n")}" 
+      "| #{@attributes.join("\n")}"
     end
   end
 end

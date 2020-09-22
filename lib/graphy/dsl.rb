@@ -1,19 +1,10 @@
 module Graphy
   class Dsl
-    @registry = {}
-    @edges = []
-
-    def self.registry
-      @registry
-    end
-
-    def self.edges
-      @edges
-    end
+    attr_accessor :graph
 
     def initialize(name, options = {}, &block)
       @graph = GraphViz.new(name, map_options(options.merge(label: name)))
-      instance_eval(&block) if block
+      instance_eval(&block) if block_given?
     end
 
     def namespace(name, &block)
@@ -30,35 +21,25 @@ module Graphy
     end
 
     def node(name, shape: 'circle', &block)
-      return graph.get_node(name) unless graph.get_node(name.to_s).nil?
-
-      node = Node.new(name, graph: graph, shape: shape)
-      node.instance_eval(&block) if block_given?
-      Dsl.registry[name] = node
+      options = {graph: graph, shape: shape}
+      Node.find_or_create(name, options: options, &block)
     end
 
     def entity(name, parent = nil, &block)
-      return graph.get_node(name) unless graph.get_node(name.to_s).nil?
+      return Registry.instance.nodes[name] if Registry.instance.node?(name)
 
-      entity = Entity.new(name, graph: graph)
-      entity.add_dependency(parent, type: :parent) if parent
-      entity.instance_eval(&block) if block_given?
-      Dsl.registry[name] = entity
+      entity = Entity.new(name: name, graph: graph)
+      entity.build(&block)
+      entity.add_dependency(parent, color: 'blue') if parent
+      Registry.instance.nodes[name] = entity
     end
 
-    def step(from, to:, options: {})
-      return if Dsl.edges.any? { |x| [from, to] == x }
-      source = Dsl.registry[from].graph_node
-      dest = Dsl.registry[to].graph_node
+    def step(from, to:, **options)
+      source = Registry.instance.nodes[from]
+      dest = Registry.instance.nodes[to]
       return if source.nil? || dest.nil?
 
-      Dsl.edges << [from, to]
-      graph.add_edge(source, dest, options)
-    end
-
-    def graph
-      build
-      @graph
+      dest.add_dependency(source, **options)
     end
 
     def write(options = {})
@@ -66,14 +47,6 @@ module Graphy
     end
 
     private
-
-    def build
-      Dsl.registry.each do |name, node|
-        node.dependencies.each do |dep|
-          step(dep.ref, to: name, options: dep.edge_attributes)
-        end
-      end
-    end
 
     def map_options(options = {})
       align = options.delete(:align)

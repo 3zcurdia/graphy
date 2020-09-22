@@ -1,8 +1,8 @@
 require 'graphviz'
 require 'graphy/node'
 require 'graphy/entity'
-require 'graphy/dependency'
 require 'graphy/dsl'
+require 'graphy/registry'
 require 'graphy/version'
 
 module Graphy
