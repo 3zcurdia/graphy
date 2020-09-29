@@ -7,9 +7,9 @@ module Graphy
       instance_eval(&block) if block_given?
     end
 
-    # def namespace(name, &block)
-    #   diagram.draw_graph(name, { parent: diagram.graph }, &block)
-    # end
+    def namespace(name, &block)
+      diagram.draw_graph(name, { parent: diagram.graph }, &block)
+    end
 
     def component(name, &block)
       node(name, shape: 'component', &block)
