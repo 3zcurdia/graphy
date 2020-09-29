@@ -1,15 +1,23 @@
 module Graphy
   class Entity < Node
     def initialize(**params)
-      super(**params.merge(shape: 'record'))
+      super(**params.merge(shape: 'Mrecord'))
       @attributes = []
     end
 
-    def attributes(*values)
+    def attrs(*values)
       @attributes = values
     end
 
+    def meths(*values)
+      @attributes << values.map { |x| "#{x}()"}
+    end
+
     protected
+
+    def draw_edge(dependency, **options)
+      diagram.draw_edge(dependency.gnode, gnode, options)
+    end
 
     def label
       "{ #{name} #{attributes_label} }"

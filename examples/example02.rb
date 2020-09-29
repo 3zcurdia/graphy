@@ -3,16 +3,16 @@ require 'graphy'
 
 Graphy.define 'Life View' do
   entity 'Animal' do
-    attributes :name, :other
+    attrs :name, :other
   end
 
   entity 'Dog', 'Animal' do
-    attributes :color
+    attrs :color
     uses 'Friendly'
   end
 
   entity 'Cat', 'Animal' do
-    attributes :scratch
+    meths :scratch
   end
 
   write png: "#{$0}.png"
