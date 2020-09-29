@@ -1,6 +1,6 @@
 # Graphy
 
-Create any diagram as code
+DSL to create graph diagrams as code
 
 ## Installation
 
@@ -31,12 +31,12 @@ Graphy.define 'Life View' do
     end
 
     entity 'Dog', 'Animal' do
-      attributes :color
+      attrs :color
       uses 'Friendly'
     end
 
     entity 'Cat', 'Animal' do
-      attributes :scratch
+      meths :scratch
     end
   end
 
@@ -50,7 +50,7 @@ end
 ### State machine
 
 ```ruby
-Graphy.define 'State machine', align: :horizontal  do
+Graphy.define 'State machine', orientation: :horizontal  do
   node 'A'
   node 'B', shape: 'diamond'
   node 'C'
