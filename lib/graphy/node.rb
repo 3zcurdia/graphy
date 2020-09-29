@@ -24,7 +24,7 @@ module Graphy
       return if Registry.edge?(self, dependency)
 
       Registry.add_edge(self, dependency)
-      diagram.draw_edge(gnode, dependency.gnode, options)
+      draw_edge(dependency, **options)
     end
     alias :uses :add_dependency
 
@@ -42,6 +42,10 @@ module Graphy
     end
 
     protected
+
+    def draw_edge(dependency, **options)
+      diagram.draw_edge(gnode, dependency.gnode, options)
+    end
 
     def node_params
       {

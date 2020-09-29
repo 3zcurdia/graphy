@@ -5,11 +5,19 @@ module Graphy
       @attributes = []
     end
 
-    def set(*values)
+    def attrs(*values)
       @attributes = values
     end
 
+    def meths(*values)
+      @attributes << values.map { |x| "#{x}()"}
+    end
+
     protected
+
+    def draw_edge(dependency, **options)
+      diagram.draw_edge(dependency.gnode, gnode, options)
+    end
 
     def label
       "{ #{name} #{attributes_label} }"

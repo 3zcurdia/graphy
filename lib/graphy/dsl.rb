@@ -25,7 +25,7 @@ module Graphy
     end
 
     def entity(name, parent = nil, &block)
-      entity = Entity.new(name, diagram: diagram)
+      entity = Entity.new(name: name, diagram: diagram)
       entity.build(&block)
       entity.add_dependency(parent, color: 'blue') if parent
     end
