@@ -1,7 +1,7 @@
 require 'bundler/setup'
 require 'graphy'
 
-Graphy.define 'State machine', align: :horizontal do
+Graphy.define 'State machine', orientation: :horizonal do
   node 'A'
   node 'B', shape: 'diamond'
   node 'C'

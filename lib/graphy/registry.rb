@@ -18,7 +18,7 @@ module Graphy
     end
 
     def edge?(source, destiny)
-      edges.key?["#{source}->#{destiny}"]
+      edges.key?("#{source}->#{destiny}")
     end
 
     def add_edge(source, destiny, options = {})

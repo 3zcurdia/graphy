@@ -1,16 +1,15 @@
 module Graphy
   class Dsl
-    attr_accessor :graph
+    attr_accessor :diagram
 
     def initialize(name, options = {}, &block)
-      @graph = GraphViz.new(name, map_options(options.merge(label: name)))
+      @diagram = Diagram.new(name, options, &block)
       instance_eval(&block) if block_given?
     end
 
-    def namespace(name, &block)
-      opts = { parent: graph, type: graph.type }
-      graph.add_graph(Dsl.new(name, opts, &block).graph)
-    end
+    # def namespace(name, &block)
+    #   diagram.draw_graph(name, { parent: diagram.graph }, &block)
+    # end
 
     def component(name, &block)
       node(name, shape: 'component', &block)
@@ -21,37 +20,22 @@ module Graphy
     end
 
     def node(name, shape: 'circle', &block)
-      options = {graph: graph, shape: shape}
-      Node.find_or_create(name, options: options, &block)
+      options = {diagram: diagram, shape: shape}
+      Node.for(name, **options).build(&block)
     end
 
     def entity(name, parent = nil, &block)
-      return Registry.instance.nodes[name] if Registry.instance.node?(name)
-
-      entity = Entity.new(name: name, graph: graph)
+      entity = Entity.new(name, diagram: diagram)
       entity.build(&block)
       entity.add_dependency(parent, color: 'blue') if parent
-      Registry.instance.nodes[name] = entity
     end
 
     def step(from, to:, **options)
-      source = Registry.instance.nodes[from]
-      dest = Registry.instance.nodes[to]
-      return if source.nil? || dest.nil?
-
-      dest.add_dependency(source, **options)
+      Node.for(from, diagram: diagram).add_dependency(to, **options)
     end
 
     def write(options = {})
-      graph.output(options)
-    end
-
-    private
-
-    def map_options(options = {})
-      align = options.delete(:align)
-      rankdir = align == :horizontal ? 'LR' : nil
-      options.merge(rankdir: rankdir).compact
+      diagram.write(options)
     end
   end
 end

@@ -10,14 +10,14 @@ module Graphy
       margin:      '0,0',
       concentrate: true,
       labelloc:    :t,
-      fontsize:    11,
+      fontsize:    14,
       fontname:    'Arial BoldMT',
       splines:     'spline'
     }
 
     NODE_ATTRIBUTES = {
       shape:    "Mrecord",
-      fontsize: 10,
+      fontsize: 12,
       fontname: "ArialMT",
       margin:   "0.07,0.05",
       penwidth: 1.0
@@ -25,8 +25,7 @@ module Graphy
 
     EDGE_ATTRIBUTES = {
       fontname:      "ArialMT",
-      fontsize:      7,
-      dir:           :both,
+      fontsize:      10,
       arrowsize:     0.9,
       penwidth:      1.0,
       labelangle:    32,
@@ -62,8 +61,7 @@ module Graphy
     end
 
     def draw_edge(from, to, options)
-      return if Registry.edges?(from, to)
-      graph.add_edges(from), to, options)
+      graph.add_edges(from, to, options)
     end
 
     def draw_graph(name, options={}, &block)
