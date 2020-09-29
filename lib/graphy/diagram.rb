@@ -64,10 +64,8 @@ module Graphy
       graph.add_edges(from, to, options)
     end
 
-    def draw_graph(name, options={}, &block)
-      subgraph = Diagram.new(name, options.merge(parent: self.graph))
-      subgraph.instance_eval(&block) if block_given?
-      graph.add_graph(subgraph.graph)
+    def draw_graph(diagram)
+      graph.add_graph(diagram.graph)
     end
 
     def write(options = {})

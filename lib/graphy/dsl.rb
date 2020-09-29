@@ -8,7 +8,7 @@ module Graphy
     end
 
     def namespace(name, &block)
-      diagram.draw_graph(name, { parent: diagram.graph }, &block)
+      diagram.draw_graph(Dsl.new(name, { parent: diagram.graph }, &block).diagram)
     end
 
     def component(name, &block)
